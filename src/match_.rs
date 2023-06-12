@@ -169,13 +169,14 @@ fn add_to_some(some_none: Option<u8>) -> Option<u8> {
 
 
 fn catch_alls() {
-    //There are two catch_alls: other and _
+    //There are two catch_alls: _ and variable coverage (idk what its real name is)
 
-    //other is like the default key: if a valiue hasn't passed any other conditions that one is eval'd
     //Let's say we have a board game: 
     //6 means you roll again and go double those spaces forward, 
     //1 means you roll again and go that many spaces back,
     //anything else you just go that many spaces forward
+
+    //use variable coverage if you want to use the value you catch
     let roll: u8 = 3;
     
     match roll {
@@ -184,6 +185,7 @@ fn catch_alls() {
         other => println!("Move forward {other} spaces!"),
     }
     //This is okay, other catches all patterns not explicitly listed
+    //the catch all variable can be basically anything btw not just other (its not a keyword)
 
     //Use _ if we aren't going to use the value we catch
     match roll {
@@ -209,10 +211,7 @@ fn catch_alls() {
 
 //Use references if you want to refer to your match's inner contents
 fn match_ownership() {
-    let heaped_option: Option<Vec<String>> = Some(vec![
-        String::from("Hello"), 
-        String::from("World!"),
-    ]);
+    let heaped_option: Option<Vec<u32>> = Some(vec![43556, 96753]);
 
     //this is ok: we don't ever take ownership of stacked_option's inner data, we just check if it exists or not
     match heaped_option {
@@ -228,7 +227,7 @@ fn match_ownership() {
     // } 
 
     //heaped_option lost ownership of heap data, so we can't use it anymore
-    //println!("{heaped_option:?}")
+    // println!("{heaped_option:?}");
 
     //to fix, make the match use a reference:
     match &heaped_option {
@@ -237,5 +236,6 @@ fn match_ownership() {
     } 
     println!("{heaped_option:?}")
     //Rust 'pushes down' references from outer to inner fields, 
-    //so we now have &Option<&Vec<&String>> and ownership isn't taken
+    //so we now have &Option<&Vec<u32>> and ownership isn't taken
+    //Check out rust binding modes for more info
 }
