@@ -236,6 +236,6 @@ fn match_ownership() {
         None => (),
     } 
     println!("{heaped_option:?}")
-
-    //Done!
+    //Rust 'pushes down' references from outer to inner fields, 
+    //so we now have &Option<&Vec<&String>> and ownership isn't taken
 }
