@@ -205,13 +205,14 @@ fn catch_alls() {
         _ => (),
     }
 
+    println!();
     match_ownership();
 }
 
 
 //Use references if you want to refer to your match's inner contents
 fn match_ownership() {
-    let heaped_option: Option<Vec<u32>> = Some(vec![43556, 96753]);
+    let mut heaped_option: Option<Vec<String>> = Some(vec![String::from("Hello"), String::from("World")]);
 
     //this is ok: we don't ever take ownership of stacked_option's inner data, we just check if it exists or not
     match heaped_option {
@@ -230,12 +231,21 @@ fn match_ownership() {
     // println!("{heaped_option:?}");
 
     //to fix, make the match use a reference:
-    match &heaped_option {
-        Some(data) => println!("{}", data[1]),
+    let option_ref = &mut heaped_option;
+
+    match option_ref {
+        Some(data) => {
+            data[0] = String::from("Goodbye");
+            data[1] = String::from("Earth");
+        }
         None => (),
     } 
-    println!("{heaped_option:?}")
-    //Rust 'pushes down' references from outer to inner fields, 
-    //so we now have &Option<&Vec<u32>> and ownership isn't taken
+
+    let heap = heaped_option.unwrap();
+
+    println!("{} {}", heap[0], heap[1]);
+
+    // *** Rust 'pushes down' references from outer to inner fields in match statements, 
+    //so we now have &Option<&Vec<&String>> and ownership isn't taken
     //Check out rust binding modes for more info
 }
