@@ -7,10 +7,10 @@ pub fn enumerate_coolness() {
 
     //is_some | is_some_and
     let valid_u8: Option<u8> = Some(10u8);
-    let lost_u8: Option<u8> = None;        
+    let lost_u8: Option<u8> = None;
 }
 
 fn add_some_u8(sm: Option<u8>) -> Option<u8> {
     //COME BACK WHEN YOU LEARN MATCH STATEMENTS!
-    Some(3)
+    Some(4)
 }
