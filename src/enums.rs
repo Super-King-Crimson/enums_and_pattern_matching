@@ -17,8 +17,6 @@ pub fn introduce() {
     Finally, we'll go over the if let construct, which will make enums easier to handle in code.");
 }
 
-
-
 //Enums allow you to say one value is a number of a specific group of values.
 //For example, let's create an enum that represents IP Addresses
 enum IpAddrKind {
@@ -26,7 +24,7 @@ enum IpAddrKind {
     V4,
     V6,
 }
-//Each IP address can only be a Version 4 or Version 6, 
+//Each IP address can only be a Version 4 or Version 6,
 //but they're both fundamentally IPs, so they can be treated similarly
 
 pub fn explain() {
@@ -84,11 +82,16 @@ enum IpAddr {
     V6(Ipv6Addr),
 }
 
-
 //Look at all these different fields for a message!
 enum Message {
     //Woah, named fields!
-    Moving { x1: i32, y1: i32, x2: i32, y2: i32, speed: i8 },
+    Moving {
+        x1: i32,
+        y1: i32,
+        x2: i32,
+        y2: i32,
+        speed: i8,
+    },
     Warning(String),
     Multicolor(u32, u32, u32),
 }
@@ -100,7 +103,7 @@ impl Message {
     }
 }
 
-fn implement() {    
+fn implement() {
     let warn = Message::Warning(String::from("Failed to touch grass"));
     let mover = Message::Moving {
         x1: -100,
@@ -121,28 +124,26 @@ fn implement() {
     option();
 }
 
+//Rust doesn't have null, but they do have a way to represent a value as existing or not existing
+//Here it is: the Option enum!
+enum BasicallyOption<T> {
+    None,
+    Some(T),
+}
 
 fn option() {
-    //Rust doesn't have null, but they do have a way to represent a value as existing or not existing
-    //Here it is: the Option enum!
-    //          enum Option<T> {
-    //              None,
-    //              Some(T),
-    //          }
-
     let some_number: Option<u8> = Some(5);
     let some_char: Option<char> = Some('a');
     let absent_number: Option<i32> = None;
 
     //I don't really understand why but apparently null is bad and None is better
     //Here's an example of why (i think?)
-    
+
     //let sum: u8 = 20 + some_number;
 
     //Rust doesn't know how to add a Some<u8> to a u8, so you have to convert it to a u8
     //This fixes the problem because now you can't assume something is/isn't null
     //We can use MATCH STATEMENTS (next lesson!) to handle all the values of an enum & unpack Option<T>
-
 
     //You know what? Option is so useful let's have a side lesson to talk about it
     //GO LEARN MATCH STATEMENTS FIRST THOUGH!
